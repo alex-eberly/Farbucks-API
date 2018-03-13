@@ -1,0 +1,22 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @menu_item.name %>
+</p>
+
+<p>
+  <strong>Menu image:</strong><br />
+  <img src="https://storage.googleapis.com/farbucks_menu_images/<%= @menu_item.menu_image %>.jpg" alt="<%= @menu_item.menu_image %>">
+</p>
+
+<table class="table-light table-striped table-bordered">
+<% @menu_item.item_details.all.each do |i| %>
+	<tr>
+	  <td><%= i.size %></td> 
+	  <td><%= i.price %></td>
+	</tr>
+<% end %>
+</table>
+<%= link_to 'Edit', edit_menu_item_path(@menu_item) %> |
+<%= link_to 'Back', menu_items_path %>
