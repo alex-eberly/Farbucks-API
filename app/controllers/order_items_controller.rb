@@ -14,7 +14,7 @@ class OrderItemsController < ApplicationController
 
   # GET /order_items/new
   def new
-    @order_item = OrderItem.new
+    #@order_item = OrderItem.new
   end
 
   # GET /order_items/1/edit
@@ -24,15 +24,21 @@ class OrderItemsController < ApplicationController
   # POST /order_items
   # POST /order_items.json
   def create
-    @order_item = OrderItem.new(order_item_params)
-
+    #@order_item = OrderItem.new(order_item_params)
+	
+	@order = current_order
+	@order_item = @order.order_items.new(order_item_params)
+	@order_item.quantity = 1
+	@order.save
+	session[:order_id] = @order.id
+	
     respond_to do |format|
       if @order_item.save
-        format.html { redirect_to @order_item, notice: 'Order item was successfully created.' }
-        format.json { render :show, status: :created, location: @order_item }
+        format.html { redirect_to @order, notice: 'Order item was successfully created.' }
+        format.json { render :show, status: :created, location: @order }
       else
         format.html { render :new }
-        format.json { render json: @order_item.errors, status: :unprocessable_entity }
+        format.json { render json: @order.errors, status: :unprocessable_entity }
       end
     end
   end

@@ -1,0 +1,9 @@
+<%= form_for order_item do |f| %>
+  <div><%= item_detail.size %></div>
+  <div><%= number_to_currency(item_detail.price) %></div>
+  <div>
+	<%= f.hidden_field :item_detail_id, value: item_detail.id %>
+	<%= f.submit "Add to Cart"%>
+  </div>
+
+<% end %>

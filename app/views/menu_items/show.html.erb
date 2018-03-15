@@ -11,11 +11,10 @@
 </p>
 
 <table class="table-light table-striped table-bordered">
-<% @menu_item.item_details.all.each do |i| %>
-	<tr>
-	  <td><%= i.size %></td> 
-	  <td><%= i.price %></td>
-	</tr>
+<% @menu_item.item_details.each do |i| %>
+	<!-- include our partial -->
+	<%= render "item_detail_row", item_detail: i, order_item:
+	current_order.order_items.new %> 
 <% end %>
 </table>
 <%= link_to 'Edit', edit_menu_item_path(@menu_item) %> |

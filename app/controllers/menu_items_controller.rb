@@ -11,6 +11,7 @@ class MenuItemsController < ApplicationController
   # GET /menu_items/1.json
   def show
 	@item_details = ItemDetail.all
+	@order_items = OrderItem.all
   end
 
   # GET /menu_items/new

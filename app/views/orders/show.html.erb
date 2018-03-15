@@ -1,19 +1,22 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Date:</strong>
-  <%= @order.date %>
-</p>
+<p>Order Details</p>
 
-<p>
-  <strong>Subtotal:</strong>
-  <%= @order.subtotal %>
-</p>
+<% if !current_order.order_items %>
+  "There are no items in this order."
+<% else %>
+  <%= "You have #{current_order.order_items.count} #{"item".pluralize(current_order.order_items.count)} in this order." %>    
 
-<p>
-  <strong>Subtotal:</strong>
-  <%= @order.subtotal %>
-</p>
+  <table>
+    <% current_order.order_items.each do |item| %>
+	  <tr>
+	    <td><%= "#{item.item_detail.menu_item.name}" %></td>
+		<td><%= "#{item.item_detail.size}" %></td>
+		<td><%= "#{number_to_currency(item.item_detail.price)}" %></td>
+	  </tr>
+	<% end %>
+  </table>
 
-<%= link_to 'Edit', edit_order_path(@order) %> |
-<%= link_to 'Back', orders_path %>
+  <p>Order Subtotal: <%= @order.subtotal %></p>
+
+<% end %>
