@@ -2,13 +2,13 @@
 
 <p>Order Details</p>
 
-<% if !current_order.order_items %>
+<% if !@order.order_items %>
   "There are no items in this order."
 <% else %>
-  <%= "You have #{current_order.order_items.count} #{"item".pluralize(current_order.order_items.count)} in this order." %>    
+  <%= "You have #{@order.order_items.count} #{"item".pluralize(@order.order_items.count)} in this order." %>    
 
   <table>
-    <% current_order.order_items.each do |item| %>
+    <% @order.order_items.each do |item| %>
 	  <tr>
 	    <td><%= "#{item.item_detail.menu_item.name}" %></td>
 		<td><%= "#{item.item_detail.size}" %></td>
@@ -19,4 +19,12 @@
 
   <p>Order Subtotal: <%= @order.subtotal %></p>
 
+  <% if @order.status_id != 2 %>
+
+  <p>
+    <%= link_to 'Checkout', checkout_path(order.id), :class => "btn btn-primary" %>
+  </p>
+  <% else %>
+  <i>This order has been completed.</i> <%= @order.payment.transaction_id %>
+  <% end %>
 <% end %>

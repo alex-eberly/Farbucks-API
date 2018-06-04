@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180308014006) do
+ActiveRecord::Schema.define(version: 20180406075004) do
 
   create_table "item_details", force: :cascade do |t|
     t.string "size"
@@ -57,11 +57,19 @@ ActiveRecord::Schema.define(version: 20180308014006) do
 
   create_table "orders", force: :cascade do |t|
     t.datetime "date"
-    t.decimal "subtotal"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "location_id"
     t.integer "status_id"
+  end
+
+  create_table "payments", force: :cascade do |t|
+    t.decimal "amount", precision: 8, scale: 2
+    t.integer "transaction_id", limit: 8
+    t.text "response"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "order_id"
   end
 
   create_table "statuses", force: :cascade do |t|

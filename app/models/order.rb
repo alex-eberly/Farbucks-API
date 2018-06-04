@@ -2,6 +2,7 @@ class Order < ApplicationRecord
 	belongs_to :location
 	belongs_to :status
 	has_many :order_items
+	has_one :payment
 	
 	before_validation :set_order_status_location, on: :create
 	

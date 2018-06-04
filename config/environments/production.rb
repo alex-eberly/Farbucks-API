@@ -1,6 +1,15 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  # Use the test server
+  ActiveMerchant::Billing::Base.mode = :test
+  
+  # Construct a gateway
+  ::GATEWAY = ActiveMerchant::Billing::AuthorizeNetGateway.new({
+  :login    => '5f8Ygta6D4UP',
+  :password => '9X6tq5dS5y4uE3mx'
+  })
+
   # Code is not reloaded between requests.
   config.cache_classes = true
 
